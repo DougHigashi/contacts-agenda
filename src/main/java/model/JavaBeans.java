@@ -22,29 +22,32 @@ public class JavaBeans {
 	public String getIdcon() {
 		return idcon;
 	}
+	
 	public void setIdcon(String idcon) {
 		this.idcon = idcon;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getPhone() {
 		return fone;
 	}
+	
 	public void setPhone(String fone) {
 		this.fone = fone;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-	
 }

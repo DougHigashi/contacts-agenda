@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/edit" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
@@ -34,6 +33,8 @@ public class Controller extends HttpServlet {
 			contacts(request, response);
 		} else if (action.equals("/insert")) {
 			newContact(request, response);
+		} else if (action.equals("/edit")) {
+			editContact(request, response);
 		} else { 
 			response.sendRedirect("index.html");
 		}
@@ -60,5 +61,28 @@ public class Controller extends HttpServlet {
 		dao.insertContact(contact);
 		response.sendRedirect("main");
 	}
+	
+	// Edit contact
+		protected void editContact(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			String idcon = request.getParameter("idcon");
+			
+			contact.setIdcon(idcon);
+			
+			dao.getContact(contact);
+			
+			request.setAttribute("idcon", contact.getIdcon());
+			request.setAttribute("name", contact.getName());
+			request.setAttribute("phone", contact.getPhone());
+			request.setAttribute("email", contact.getEmail());
+			
+			System.out.println(contact.getName());
+			System.out.println(contact.getPhone());
+			System.out.println(contact.getEmail());
+			
+			RequestDispatcher rs = request.getRequestDispatcher("edit.jsp");
+			rs.forward(request, response);
+		}
 
 }
+

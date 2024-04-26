@@ -24,6 +24,7 @@
 				<th>Name</th>
 				<th>Phone</th>
 				<th>E-mail</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,6 +34,7 @@
 				<td><%=list.get(i).getName()%></td>
 				<td><%=list.get(i).getPhone()%></td>
 				<td><%=list.get(i).getEmail()%></td>
+				<td><a href="edit?idcon=<%= list.get(i).getIdcon() %>" class="button">Edit</a></td>
 			</tr>
 		<%} %>
 		

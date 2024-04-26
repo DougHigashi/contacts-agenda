@@ -14,7 +14,7 @@ public class DAO {
 	private String url = "jdbc:mysql://127.0.0.1:3306/dbagenda?useTimezone=true&serverTimezone=UTC";
 
 	private String user = "root";
-	private String password = "";
+	private String password = "1234";
 
 	private Connection connect() {
 		Connection con = null;
@@ -66,7 +66,7 @@ public class DAO {
 			Connection con = connect();
 			PreparedStatement pst = con.prepareStatement(query);
 			
-			ResultSet rs =  pst.executeQuery();
+			ResultSet rs = pst.executeQuery();
 			
 			while(rs.next()) {
 				String idcon = rs.getString(1);
@@ -84,7 +84,35 @@ public class DAO {
 			System.out.println(e);
 			return null;
 		}
+	}
+	
+	
+	public void getContact(JavaBeans contact) {
+		
+		String query = "SELECT * FROM contatos WHERE idcon = ?";
+		
+		try {
+			Connection con = connect();
+			PreparedStatement pst = con.prepareStatement(query);
+			
+			pst.setString(1, contact.getIdcon());
+			
+			System.out.println("Running query: " + pst);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				contact.setIdcon(rs.getString(1));
+				contact.setName(rs.getString(2));
+				contact.setPhone(rs.getString(3));
+				contact.setEmail(rs.getString(4));
+			}
+			
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		
 	}
-
 }
