@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/edit" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/select", "/edit" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
@@ -33,6 +33,8 @@ public class Controller extends HttpServlet {
 			contacts(request, response);
 		} else if (action.equals("/insert")) {
 			newContact(request, response);
+		} else if (action.equals("/select")) {
+			selectContact(request, response);
 		} else if (action.equals("/edit")) {
 			editContact(request, response);
 		} else { 
@@ -62,16 +64,16 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 	}
 	
-	// Edit contact
-		protected void editContact(HttpServletRequest request, HttpServletResponse response)
+	// Select contact to edit
+		protected void selectContact(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-			String idcon = request.getParameter("idcon");
+			String id = request.getParameter("idcon");
 			
-			contact.setIdcon(idcon);
+			contact.setId(id);
 			
 			dao.getContact(contact);
 			
-			request.setAttribute("idcon", contact.getIdcon());
+			request.setAttribute("id", contact.getId());
 			request.setAttribute("name", contact.getName());
 			request.setAttribute("phone", contact.getPhone());
 			request.setAttribute("email", contact.getEmail());
@@ -82,6 +84,16 @@ public class Controller extends HttpServlet {
 			
 			RequestDispatcher rs = request.getRequestDispatcher("edit.jsp");
 			rs.forward(request, response);
+		}
+		
+		protected void editContact(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			contact.setId(request.getParameter("id"));
+			contact.setName(request.getParameter("cttName"));
+			contact.setPhone(request.getParameter("phone"));
+			contact.setEmail(request.getParameter("email"));
+			dao.updateContact(contact);
+			response.sendRedirect("main");
 		}
 
 }

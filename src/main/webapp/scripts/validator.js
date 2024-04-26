@@ -20,4 +20,4 @@ const validate = () => {
 	} else {
 		document.forms["frmContact"].submit()
 	}
-} 
+}

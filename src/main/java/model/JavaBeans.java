@@ -1,9 +1,9 @@
 package model;
 
 public class JavaBeans {
-	private String idcon;
+	private String id;
 	private String name;
-	private String fone;
+	private String phone;
 	private String email;
 	
 	public JavaBeans() {
@@ -11,20 +11,20 @@ public class JavaBeans {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public JavaBeans(String idcon, String name, String fone, String email) {
+	public JavaBeans(String idcon, String name, String phone, String email) {
 		super();
-		this.idcon = idcon;
+		this.id = idcon;
 		this.name = name;
-		this.fone = fone;
+		this.phone = phone;
 		this.email = email;
 	}
 	
-	public String getIdcon() {
-		return idcon;
+	public String getId() {
+		return id;
 	}
 	
-	public void setIdcon(String idcon) {
-		this.idcon = idcon;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -36,11 +36,11 @@ public class JavaBeans {
 	}
 	
 	public String getPhone() {
-		return fone;
+		return phone;
 	}
 	
-	public void setPhone(String fone) {
-		this.fone = fone;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	public String getEmail() {

@@ -30,11 +30,11 @@
 		<tbody>
 		<% for (int i = 0; i < list.size(); i++) { %>
 			<tr>
-				<td><%=list.get(i).getIdcon()%></td>
+				<td><%=list.get(i).getId()%></td>
 				<td><%=list.get(i).getName()%></td>
 				<td><%=list.get(i).getPhone()%></td>
 				<td><%=list.get(i).getEmail()%></td>
-				<td><a href="edit?idcon=<%= list.get(i).getIdcon() %>" class="button">Edit</a></td>
+				<td><a href="select?idcon=<%=list.get(i).getId()%>" class="button">Edit</a></td>
 			</tr>
 		<%} %>
 		
