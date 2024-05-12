@@ -23,6 +23,18 @@ h1 {
 	cursor: pointer;
 }
 
+.deleteButton {
+	text-decoration: none;
+	background-color: #ff0000;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 700;
+	border-radius: 5px;
+	border-style: none;
+	cursor: pointer;
+}
+
 .inputBox {
 	width: 320px;
 	padding: 5px;

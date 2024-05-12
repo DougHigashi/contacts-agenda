@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/select", "/edit" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/select", "/edit", "/delete" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
@@ -37,6 +37,8 @@ public class Controller extends HttpServlet {
 			selectContact(request, response);
 		} else if (action.equals("/edit")) {
 			editContact(request, response);
+		} else if (action.equals("/delete")) {
+			deleteContact(request, response);
 		} else { 
 			response.sendRedirect("index.html");
 		}
@@ -78,10 +80,6 @@ public class Controller extends HttpServlet {
 			request.setAttribute("phone", contact.getPhone());
 			request.setAttribute("email", contact.getEmail());
 			
-			System.out.println(contact.getName());
-			System.out.println(contact.getPhone());
-			System.out.println(contact.getEmail());
-			
 			RequestDispatcher rs = request.getRequestDispatcher("edit.jsp");
 			rs.forward(request, response);
 		}
@@ -93,6 +91,15 @@ public class Controller extends HttpServlet {
 			contact.setPhone(request.getParameter("phone"));
 			contact.setEmail(request.getParameter("email"));
 			dao.updateContact(contact);
+			response.sendRedirect("main");
+		}
+		
+		protected void deleteContact(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			
+			contact.setId(request.getParameter("idcon"));
+			
+			dao.deleteContact(contact);
 			response.sendRedirect("main");
 		}
 

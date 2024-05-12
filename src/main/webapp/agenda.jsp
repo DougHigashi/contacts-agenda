@@ -24,7 +24,7 @@
 				<th>Name</th>
 				<th>Phone</th>
 				<th>E-mail</th>
-				<th></th>
+				<th>Options</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,11 +34,15 @@
 				<td><%=list.get(i).getName()%></td>
 				<td><%=list.get(i).getPhone()%></td>
 				<td><%=list.get(i).getEmail()%></td>
-				<td><a href="select?idcon=<%=list.get(i).getId()%>" class="button">Edit</a></td>
+				<td><a href="select?idcon=<%=list.get(i).getId()%>" class="button">Edit</a>
+					<a href="javascript: confirmDelete(<%=list.get(i).getId()%>)" class="deleteButton">Delete</a>
+				</td>
 			</tr>
 		<%} %>
 		
 		</tbody>
 	</table>
+	
 </body>
+<script src="scripts/confirm.js"></script>
 </html>

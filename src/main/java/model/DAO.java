@@ -101,8 +101,6 @@ public class DAO {
 			
 			pst.setString(1, contact.getId());
 			
-			System.out.println("Running query: " + pst);
-			
 			ResultSet rs = pst.executeQuery();
 			
 			while(rs.next()) {
@@ -132,8 +130,6 @@ public class DAO {
 			pst.setString(3, contact.getEmail());
 			pst.setInt(4, Integer.parseInt(contact.getId()));
 			
-			System.out.println("Running query: " + pst);
-			
 			pst.executeUpdate();
 			
 			con.close();
@@ -141,6 +137,25 @@ public class DAO {
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("FAIL ON METHOD 'updateContact'");
+		}
+	}
+	
+	public void deleteContact(JavaBeans contact) {
+		String query = "DELETE FROM contatos WHERE id = ?";
+		
+		try {
+			Connection con = connect();
+			PreparedStatement pst = con.prepareStatement(query);
+
+			pst.setInt(1, Integer.parseInt(contact.getId()));
+			
+			pst.executeUpdate();
+			
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("FAIL ON METHOD 'deleteContact'");
 		}
 	}
 }
