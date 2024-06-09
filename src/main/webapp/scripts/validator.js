@@ -1,5 +1,5 @@
 /**
- *  Form validation
+ *  Validates mandatory fields
  */
 
 const validate = () => {

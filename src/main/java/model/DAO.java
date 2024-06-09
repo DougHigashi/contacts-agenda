@@ -6,16 +6,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DAO.
+ */
 public class DAO {
 
-	/** Connection **/
+	/**  Connection *. */
 
 	private String driver = "com.mysql.cj.jdbc.Driver";
+	
+	/** The url. */
 	private String url = "jdbc:mysql://127.0.0.1:3306/dbagenda?useTimezone=true&serverTimezone=UTC";
 
+	/** The user. */
 	private String user = "root";
+	
+	/** The password. */
 	private String password = "1234";
 
+	/**
+	 * Connect.
+	 *
+	 * @return the connection
+	 */
 	private Connection connect() {
 		Connection con = null;
 		try {
@@ -28,16 +42,23 @@ public class DAO {
 		}
 	}
 
+	/**
+	 * Test conection.
+	 */
 	public void testConection() {
 		try {
 			Connection con = connect();
-			System.out.println(con);
 			con.close();
 		} catch (Exception e) {
 			System.out.println();
 		}
 	}
 
+	/**
+	 * Insert contact.
+	 *
+	 * @param contact the contact
+	 */
 	public void insertContact(JavaBeans contact) {
 		String query = "INSERT INTO CONTATOS (name, phone, email) values (?,?,?)";
 
@@ -57,6 +78,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * List contacts.
+	 *
+	 * @return the array list
+	 */
 	public  ArrayList<JavaBeans> listContacts() {
 		
 		ArrayList<JavaBeans> contacts = new ArrayList<>();
@@ -89,6 +115,12 @@ public class DAO {
 	}
 	
 	
+	/**
+	 * Gets the contact.
+	 *
+	 * @param contact the contact
+	 * @return the contact
+	 */
 	public void getContact(JavaBeans contact) {
 		
 		String query = "SELECT * FROM contatos WHERE id = ?";
@@ -96,8 +128,6 @@ public class DAO {
 		try {
 			Connection con = connect();
 			PreparedStatement pst = con.prepareStatement(query);
-			
-			System.out.println(pst);
 			
 			pst.setString(1, contact.getId());
 			
@@ -118,6 +148,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Update contact.
+	 *
+	 * @param contact the contact
+	 */
 	public void updateContact(JavaBeans contact) {
 		String query = "UPDATE contatos SET name = ?, phone = ?, email = ? WHERE id = ?";
 		
@@ -140,6 +175,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Delete contact.
+	 *
+	 * @param contact the contact
+	 */
 	public void deleteContact(JavaBeans contact) {
 		String query = "DELETE FROM contatos WHERE id = ?";
 		

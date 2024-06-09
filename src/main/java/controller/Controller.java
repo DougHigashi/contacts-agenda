@@ -13,21 +13,40 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Controller.
+ */
 @WebServlet(urlPatterns = { "/Controller", "/main", "/agenda", "/insert", "/select", "/edit", "/delete" })
 public class Controller extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The dao. */
 	private DAO dao = new DAO();
+	
+	/** The contact. */
 	private JavaBeans contact = new JavaBeans();
 
+	/**
+	 * Instantiates a new controller.
+	 */
 	public Controller() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getServletPath();
-		System.out.println(action);
 
 		if(action.equals("/main")) {
 			contacts(request, response);
@@ -44,7 +63,14 @@ public class Controller extends HttpServlet {
 		}
 	}
 
-	// List contacts
+	/**
+	 * Contacts.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	protected void contacts(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ArrayList<JavaBeans> list = dao.listContacts();
@@ -55,7 +81,14 @@ public class Controller extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	// List contacts
+	/**
+	 * New contact.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	protected void newContact(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -66,12 +99,17 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 	}
 	
-	// Select contact to edit
+	/**
+	 * Select contact.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 		protected void selectContact(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-			String id = request.getParameter("idcon");
-			
-			contact.setId(id);
+			contact.setId(request.getParameter("idcon"));
 			
 			dao.getContact(contact);
 			
@@ -84,6 +122,14 @@ public class Controller extends HttpServlet {
 			rs.forward(request, response);
 		}
 		
+		/**
+		 * Edits the contact.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 * @throws ServletException the servlet exception
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		protected void editContact(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			contact.setId(request.getParameter("id"));
@@ -94,9 +140,16 @@ public class Controller extends HttpServlet {
 			response.sendRedirect("main");
 		}
 		
+		/**
+		 * Delete contact.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 * @throws ServletException the servlet exception
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		protected void deleteContact(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-			
 			contact.setId(request.getParameter("idcon"));
 			
 			dao.deleteContact(contact);
@@ -104,4 +157,3 @@ public class Controller extends HttpServlet {
 		}
 
 }
-
